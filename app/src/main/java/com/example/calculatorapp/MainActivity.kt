@@ -1,140 +1,65 @@
-package com.example.calculatorapp
+package com.example.simplecalculator
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.icu.text.NumberingSystem
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.widget.Button
-import android.widget.CheckedTextView
 import android.widget.EditText
 import android.widget.TextView
-import kotlinx.coroutines.DefaultExecutor.isEmpty
-import java.lang.Double.toString
-import java.lang.Integer.toString
-//import kotlin..synthetic.main.activity_main.*
-import java.math.BigDecimal
-import java.math.RoundingMode
-import java.util.Arrays.toString
-import kotlin.collections.EmptyList.isEmpty
+import androidx.appcompat.app.AppCompatActivity
+import com.example.calculatorapp.R
 
-private var Nothing?.input: String
-    get() {}
-    set() {}
 
 class MainActivity : AppCompatActivity() {
-    lateinit var editTextNumber1: TextView
-    lateinit var editTextNumber: TextView
-    lateinit var button:Button
-    lateinit var button2: Button
-    lateinit var button4: Button
-    lateinit var button5: Button
-    lateinit var textView2: TextView
-
-    @SuppressLint("ResourceType")
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    var editTextNumber: EditText? = null
+    var editTextNumber2: EditText? = null
+    var ButtonMODULUS: Button? = null
+    var ButtonADDITION: Button? = null
+    var ButtonSUBTRACT: Button? = null
+    var ButtonMULTIPLY: Button? = null
+    var num1: Double? = null
+    var num2: Double? = null
+    var TextView: TextView? = null
+    @SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        editTextNumber=findViewById(R.id.editTextNumber2)
-
-
+        editTextNumber= findViewById(R.id.textView2)
+        editTextNumber2= findViewById(R.id.textView2)
+        ButtonADDITION = findViewById(R.id.Button)
+        ButtonMODULUS = findViewById(R.id.Button)
+        ButtonMULTIPLY = findViewById(R.id.Button)
+        ButtonSUBTRACT= findViewById(R.id.Button)
+        TextView= findViewById(R.id.textView2)
+        Clicklistener()
     }
 
-    override fun onResume() {
-        super.onResume()
-        editTextNumber=findViewById(findViewById(R.id.editTextNumber))
-        editTextNumber.setOnClickListener {
-            val intent=Intent(this,editTextNumber::class.java)
-            startActivity(intent)
+    fun Clicklistener() {
+        ButtonADDITION!!.setOnClickListener {
+            num1 = editTextNumber!!.text.toString().toDouble()
+            num2 = editTextNumber2!!.text.toString().toDouble()
+            val result = num1!! + num2!!
+            TextView!!.text = result.toString()
         }
-
+        ButtonSUBTRACT!!.setOnClickListener {
+            num1 = editTextNumber!!.text.toString().toDouble()
+            num2 = editTextNumber2!!.text.toString().toDouble()
+            val result = num1!! - num2!!
+            TextView!!.text = result.toString()
+        }
+        ButtonMULTIPLY!!.setOnClickListener {
+            num1 = editTextNumber!!.text.toString().toDouble()
+            num2 = editTextNumber2!!.text.toString().toDouble()
+            val result = num1!! * num2!!
+            TextView!!.text = result.toString()
+        }
+        ButtonMODULUS!!.setOnClickListener {
+            num1 = editTextNumber!!.text.toString().toDouble()
+            num2 = editTextNumber2!!.text.toString().toDouble()
+            val result = num1!! / num2!!
+            TextView!!.text = result.toString()
+        }
     }
 }
-    fun  inputIsNotEmpty(): Boolean {
-        var b = true;
-        val Number1 = null
-        if (Number1.isEmpty()) {
-            val input1 = null
-            input1;error("Required")
-//    input1.requestFocus()
-            input1 = Number1
-        }
-        if (Number3.isEmpty()) {
-            val input2 = Unit
-        }
-        val input2 = Unit
-        input2;error("Required")
-//    input2.requestFocus()
-        input2 = Unit
-    }
-
-private fun Nothing?.isEmpty(): Boolean {
-
-}
-
-
-class Number3 {
-
-}
-
-class Number2 {
-
-}
-
-
-fun ADDITION(){
-        if(inputIsNotEmpty()){
-            val input1 = null
-            var inputdata1=input1.toString().trim().toBigDecimal()
-            val input2 = null
-            var inputdata2=input2.toString().trim().toBigDecimal()
-            val result = null
-            result.input=inputdata1.add(inputdata2).toString()
-        }
-    }
-
-    fun SUBTRACT(){
-        if(inputIsNotEmpty()){
-            val input1 = null
-            var inputdata1=input1.toString().trim().toBigDecimal()
-            val input2 = null
-            var inputdata2=input2.toString().trim().toBigDecimal()
-            val result = null
-            result.input=inputdata1.subtract(inputdata2).toString();
-        }
-    }
-
-    fun MULTIPLY(){
-        if(inputIsNotEmpty()){
-            val input1 = null
-            var inputdata1=input1.toString().trim().toBigDecimal()
-            val input2 = null
-            var inputdata2=input2.toString().trim().toBigDecimal()
-            val result = null
-            result.input=inputdata1.multiply(inputdata2).toString()
-        }
-    }
-
-
-    fun MODULUS() {
-        if (inputIsNotEmpty()) {
-            val input1 = null
-            var inputdata1 = input1.toString().trim().toBigDecimal()
-            var input2: String? = null
-            var inputdata2 = input2.toString().trim().toBigDecimal()
-
-            if (inputdata2.compareTo(BigDecimal.ZERO) == 0) {
-                input2 = "invalid input"
-            } else {
-                val result = null
-                result.input = inputdata1.divide(inputdata2, 2, RoundingMode.HALF_UP).toString();
-            }
-        }
-    }
-
 
 
 
